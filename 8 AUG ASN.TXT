@@ -1,0 +1,360 @@
+SQL> CONN
+Enter user-name: SCOTT/tiger
+Connected.
+SQL> --dno along with total sal in each dept
+SQL> SELECT DEPTNO, SUM(SAL)
+  2  FROM EMP
+  3  GROUP BY DEPTNO;
+
+    DEPTNO   SUM(SAL)                                                           
+---------- ----------                                                           
+        30       9400                                                           
+        20      10875                                                           
+        10       8750                                                           
+
+SQL> --DNO AND NAME OF EMP WORKING IN EACH DEPT
+SQL> SELECT DEPTNO, ENAME
+  2  FROM EMP
+  3  GROUP BY DEPTNO;
+SELECT DEPTNO, ENAME
+               *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT DEPTNO, COUNT(*)
+  2  FROM EMP
+  3* GROUP BY DEPTNO
+SQL> /
+
+    DEPTNO   COUNT(*)                                                           
+---------- ----------                                                           
+        30          6                                                           
+        20          5                                                           
+        10          3                                                           
+
+SQL> --JOB WISE TOTAL SAL
+SQL> SELECT SUM(SAL), JOB
+  2  FROM EMP
+  3  GROUP BY JOB;
+
+  SUM(SAL) JOB                                                                  
+---------- ---------                                                            
+      4150 CLERK                                                                
+      5600 SALESMAN                                                             
+      5000 PRESIDENT                                                            
+      8275 MANAGER                                                              
+      6000 ANALYST                                                              
+
+SQL> --DEPTNO AND MAX SAL IN EACH DEPT
+SQL> SELECT DEPTNO, MAX(SAL)
+  2  FROM EMP
+  3  GROUP BY DEPTNO;
+
+    DEPTNO   MAX(SAL)                                                           
+---------- ----------                                                           
+        30       2850                                                           
+        20       3000                                                           
+        10       5000                                                           
+
+SQL> --JOB AND MIN SAL FOR EACH ROLE
+SQL> SELECT JOB, MIN(SAL)
+  2  FROM EMP
+  3  GRUP BY JOB;
+GRUP BY JOB
+     *
+ERROR at line 3:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT JOB, MIN(SAL)
+  2  FROM EMP
+  3* GROUP BY JOB
+SQL> /
+
+JOB         MIN(SAL)                                                            
+--------- ----------                                                            
+CLERK            800                                                            
+SALESMAN        1250                                                            
+PRESIDENT       5000                                                            
+MANAGER         2450                                                            
+ANALYST         3000                                                            
+
+SQL> --DEPTNO AND AVG SAL
+SQL> SELECT DEPTNO, AVG(SAL)
+  2  FROM EMP
+  3  GROUP BY DEPTNO;
+
+    DEPTNO   AVG(SAL)                                                           
+---------- ----------                                                           
+        30 1566.66667                                                           
+        20       2175                                                           
+        10 2916.66667                                                           
+
+SQL> --JOB WISE NO OF EMP
+SQL> SELECT JOB, COUNT(*)
+  2  FROM EMP
+  3  GROUP BY JOB;
+
+JOB         COUNT(*)                                                            
+--------- ----------                                                            
+CLERK              4                                                            
+SALESMAN           4                                                            
+PRESIDENT          1                                                            
+MANAGER            3                                                            
+ANALYST            2                                                            
+
+SQL> --DEPTNO AND TOTAL COMM
+SQL> SELECT DEPTNO, SUM(COMM)
+  2  FROM EMP
+  3  GROUP BY DEPTNO;
+
+    DEPTNO  SUM(COMM)                                                           
+---------- ----------                                                           
+        30       2200                                                           
+        20                                                                      
+        10                                                                      
+
+SQL> --JOB WISE HIGHEST SAL
+SQL> SELECT JOB, MAX(SAL
+  2  )
+  3  FROM EMP
+  4  GROUP BY JOB;
+
+JOB         MAX(SAL)                                                            
+--------- ----------                                                            
+CLERK           1300                                                            
+SALESMAN        1600                                                            
+PRESIDENT       5000                                                            
+MANAGER         2975                                                            
+ANALYST         3000                                                            
+
+SQL> --DEPTNO AND LOWEST SAL
+SQL> SELECT DEPTNO, MIN(SAL)
+  2  FROM EMP
+  3  GROUP BY DEPTNO;
+
+    DEPTNO   MIN(SAL)                                                           
+---------- ----------                                                           
+        30        950                                                           
+        20        800                                                           
+        10       1300                                                           
+
+SQL> --DEPT NO AND TOTAL SAL OF EMP EARNING MORE THAN 2000
+SQL> SELECT DEPTNO, SUM(SAl)
+  2  FROM EMP
+  3  WHERE SAL>2000
+  4  GROUP BY DEPTNO;
+
+    DEPTNO   SUM(SAL)                                                           
+---------- ----------                                                           
+        30       2850                                                           
+        20       8975                                                           
+        10       7450                                                           
+
+SQL> --JOB AND NO OF EMPLOYEES IN DEPT 10
+SQL> SELECT JOB, COUNT(*)
+  2  FROM EMP
+  3  WHERE DEPTNO=10
+  4  GROUP BY JOB;
+
+JOB         COUNT(*)                                                            
+--------- ----------                                                            
+CLERK              1                                                            
+PRESIDENT          1                                                            
+MANAGER            1                                                            
+
+SQL> --DEPTNO AND AVG SAL OF EMP WHO ARE CLERKS
+SQL> SELECT DEPTNO, AVG(SAL)
+  2  FROM EMP
+  3  WHERE JOB='CLERK'
+  4  GROUP BY DEPTNO;
+
+    DEPTNO   AVG(SAL)                                                           
+---------- ----------                                                           
+        30        950                                                           
+        20        950                                                           
+        10       1300                                                           
+
+SQL> --JOB WISE TOTAL SAL OF EMP EARNING BETWEEN 1000 AND 3000
+SQL> SELECT JOB, SUM(SAL)
+  2  FROM EMP
+  3  WHERE SAL BETWEEN 1000 AND 3000
+  4  GROUP BY JOB;
+
+JOB         SUM(SAL)                                                            
+--------- ----------                                                            
+SALESMAN        5600                                                            
+CLERK           2400                                                            
+MANAGER         8275                                                            
+ANALYST         6000                                                            
+
+SQL> --DEPTNO AND TOTAL SAL OF EMP WHO ARE NOT MANAGERS
+SQL> SELECT DEPTNO, SUM(SAL)
+  2  FROM EMP
+  3  WHERE JOB NOT LIKE 'MANAGER'
+  4  GROUP BY DEPTNO;
+
+    DEPTNO   SUM(SAL)                                                           
+---------- ----------                                                           
+        30       6550                                                           
+        20       7900                                                           
+        10       6300                                                           
+
+SQL> --JOB AND COUNT OF EMP HIRED AFTER 1982
+SQL> SELECT JOB, COUNT(*)
+  2  FROM EMP
+  3  WHERE HIREDATE > '31-DEC-1982'
+  4  GROUP BY JOB;
+
+JOB         COUNT(*)                                                            
+--------- ----------                                                            
+CLERK              1                                                            
+ANALYST            1                                                            
+
+SQL> --DEPTNO AND TOTAL SAL EMP WHOSE NAMES START WITH 'S'
+SQL> SELECT DEPTNO, SUM(SAL)
+  2  FROM EMP
+  3  WHERE ENAME LIKE 'S%'
+  4  GROUP BY DEPTNO;
+
+    DEPTNO   SUM(SAL)                                                           
+---------- ----------                                                           
+        20       3800                                                           
+
+SQL> --JOB WISE AVG SAL OF EMP RECEIVING COMM
+SQL> SELECT JOB, AVG(SAL)
+  2  FROM EMP
+  3  WHERE COMM IS NOT NULL
+  4  GROUP BY JOB;
+
+JOB         AVG(SAL)                                                            
+--------- ----------                                                            
+SALESMAN        1400                                                            
+
+SQL> --DNO AND NO OF EMP NOT IN DEPT 20
+SQL> SELECT DEPTNO, COUNT(*)
+  2  FROM EMP
+  3  WHERE DEPTNO NOT IN 20
+  4  GROUP BY DEPTNO;
+
+    DEPTNO   COUNT(*)                                                           
+---------- ----------                                                           
+        30          6                                                           
+        10          3                                                           
+
+SQL> --JOB AND TOTAL SAL OF EMP SAL LESS THAN 3000
+SQL> SELECT JOB, SUM(SAL)
+  2  FROM EMP
+  3  WHERE SAL > 3000
+  4  GROUP BY JOB;
+
+JOB         SUM(SAL)                                                            
+--------- ----------                                                            
+PRESIDENT       5000                                                            
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT JOB, SUM(SAL)
+  2  FROM EMP
+  3  WHERE SAL < 3000
+  4* GROUP BY JOB
+SQL> /
+
+JOB         SUM(SAL)                                                            
+--------- ----------                                                            
+CLERK           4150                                                            
+SALESMAN        5600                                                            
+MANAGER         8275                                                            
+
+SQL> --DNO WHERE TOTAL SAL > 5000
+SQL> SELECT DEPTNO, SUM(SAL)
+  2  FROM EMP
+  3  GROUP BY DEPTNO
+  4  HAVING SUM(SAL) > 5000;
+
+    DEPTNO   SUM(SAL)                                                           
+---------- ----------                                                           
+        30       9400                                                           
+        20      10875                                                           
+        10       8750                                                           
+
+SQL> --JOB ROLES WHERE NO OF EMP MORE THAN 2
+SQL> SELECT JOB, COUNT(*)
+  2  FROM EMP
+  3  GROUP BY JOB
+  4  HAVING COUNT(*) > 2;
+
+JOB         COUNT(*)                                                            
+--------- ----------                                                            
+CLERK              4                                                            
+SALESMAN           4                                                            
+MANAGER            3                                                            
+
+SQL> --DEPTNO WHERE AVG SAL > 2000
+SQL> SELECT DEPTNO, AVG(SAL)
+  2  FROM EMP
+  3  GROUP BY DEPTNO
+  4  HAVING AVG(SAL) > 2000;
+
+    DEPTNO   AVG(SAL)                                                           
+---------- ----------                                                           
+        20       2175                                                           
+        10 2916.66667                                                           
+
+SQL> --JOB ROLES WHERE MIN SAL LESS THAN 1000
+SQL> SELECT JOB, MIN(SAL)
+  2  FROM EMP
+  3  GOUP BY JOB
+  4  HAVING MIN(SAL) < 1000;
+GOUP BY JOB
+     *
+ERROR at line 3:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT JOB, MIN(SAL)
+  2  FROM EMP
+  3  GROUP BY JOB
+  4* HAVING MIN(SAL) < 1000
+SQL> /
+
+JOB         MIN(SAL)                                                            
+--------- ----------                                                            
+CLERK            800                                                            
+
+SQL> --DEPT NO WHERE MAX SAL > 3000
+SQL> SELECT DEPTNO, MAX(SAL)
+  2  FROM EMP
+  3  GROUP BY DEPTNO
+  4  HAVING MAX(SAL) > 3000;
+
+    DEPTNO   MAX(SAL)                                                           
+---------- ----------                                                           
+        10       5000                                                           
+
+SQL> -- JOB ROLES WHERE TOTAL SAL LESS THAN 10000
+SQL> SELECT JOB, SUM(SAL)
+  2  FROM EMP
+  3  GROUP BY JOB
+  4  HAVING SUM(SAL) < 10000;
+
+JOB         SUM(SAL)                                                            
+--------- ----------                                                            
+CLERK           4150                                                            
+SALESMAN        5600                                                            
+PRESIDENT       5000                                                            
+MANAGER         8275                                                            
+ANALYST         6000                                                            
+
+SQL> SPOOL OFF;

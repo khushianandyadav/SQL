@@ -1,0 +1,130 @@
+SQL> SET SERVEROUTPUT ON;
+SQL> --1 DECLARE VARIABLE v_city STORE VALUE 'Chennai' AND DISPLAY
+SQL> DECLARE
+  2  v_city VARCHAR(20) := 'Chennai';
+  3  BEGIN
+  4  DBMS_OUTPUT.PUT_LINE(v_city);
+  5  END;
+  6  /
+Chennai                                                                         
+
+PL/SQL procedure successfully completed.
+
+SQL> --2 2 VARIABLES a AND b ASSIGN VALUES 10 AND 20 CALCULATE SUM DISPLAY RESULT
+SQL> DECLARE
+  2  a NUMBER(10);
+  3  b NUMBER(10);
+  4  BEGIN
+  5  a := 10;
+  6  b := 20;
+  7  DBMS_OUTPUT.PUT_NEXT(a + b);
+  8  END;
+  9  /
+DBMS_OUTPUT.PUT_NEXT(a + b);
+            *
+ERROR at line 7:
+ORA-06550: line 7, column 13: 
+PLS-00302: component 'PUT_NEXT' must be declared 
+ORA-06550: line 7, column 1: 
+PL/SQL: Statement ignored 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  a NUMBER(10);
+  3  b NUMBER(10);
+  4  BEGIN
+  5  a := 10;
+  6  b := 20;
+  7  DBMS_OUTPUT.PUT_LINE(a + b);
+  8* END;
+SQL> /
+30                                                                              
+
+PL/SQL procedure successfully completed.
+
+SQL> --3 WRITE AN ANONYMOUS BLOCK DECLARES A VARIABLE FOR YOUR NAME AND PRINTS A MESSAGE LIKE Welcome, Manisha!
+SQL> DECLARE
+  2  X VARCHAR(20);
+  3  BEGIN
+  4  X := 'Khushi';
+  5  DBMS_OUTPUT.PUT_LINE('Welcome, ', X);
+  6  END;
+  7  /
+DBMS_OUTPUT.PUT_LINE('Welcome, ', X);
+*
+ERROR at line 5:
+ORA-06550: line 5, column 1: 
+PLS-00306: wrong number or types of arguments in call to 'PUT_LINE' 
+ORA-06550: line 5, column 1: 
+PL/SQL: Statement ignored 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  X VARCHAR(20);
+  3  BEGIN
+  4  X := 'Khushi';
+  5  DBMS_OUTPUT.PUT_LINE('Welcome, '||X);
+  6* END;
+SQL> /
+Welcome, Khushi                                                                 
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  X VARCHAR(20);
+  3  BEGIN
+  4  X := 'Khushi';
+  5  DBMS_OUTPUT.PUT_LINE('Welcome, '||X||'!');
+  6* END;
+SQL> /
+Welcome, Khushi!                                                                
+
+PL/SQL procedure successfully completed.
+
+SQL> --4 CREATE A PL/SQL BLOCK THAT USES := TO ASSIGN THE VALUE 'PL/SQL is powerful' to a variable and prints it.
+SQL> DECLARE
+  2  X VARCHAR(30);
+  3  BEGIN
+  4  X := &X;
+  5  DBMS_OUTPUT.PUT_LINE(X);
+  6  END;
+  7  /
+Enter value for x: PL/SQL is powerful.
+old   4: X := &X;
+new   4: X := PL/SQL is powerful.;
+X := PL/SQL is powerful.;
+            *
+ERROR at line 4:
+ORA-06550: line 4, column 13: 
+PLS-00103: Encountered the symbol "IS" when expecting one of the following: 
+% 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  X VARCHAR(30);
+  3  BEGIN
+  4  X := &X;
+  5  DBMS_OUTPUT.PUT_LINE(X);
+  6* END;
+SQL> /
+Enter value for x: 'PL/SQL is powerful.'
+old   4: X := &X;
+new   4: X := 'PL/SQL is powerful.';
+PL/SQL is powerful.                                                             
+
+PL/SQL procedure successfully completed.
+
+SQL> SPOOL OFF;

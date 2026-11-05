@@ -1,0 +1,439 @@
+SQL> 
+SQL> --1 PL SQL BLOCK TO RETREIVE ENAME, JOB TITLE, SALARY OF EMP WITH EMPNO 7839
+SQL> SET SERVEROUTPUT ON;
+SQL> DECLARE
+  2  NAME VARCHAR(20);
+  3  J_TITLE VARCHAR(20);
+  4  SALARY NUMBER(20);
+  5  BEGIN
+  6  SELECT ENAME, JOB, SAL INTO NAME, J_TITLE, SALARY
+  7  FROM EMP
+  8  WHERE EMPNO = 7839;
+  9  END;
+ 10  /
+
+PL/SQL procedure successfully completed.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  NAME VARCHAR(20);
+  3  J_TITLE VARCHAR(20);
+  4  SALARY NUMBER(20);
+  5  BEGIN
+  6  SELECT ENAME, JOB, SAL INTO NAME, J_TITLE, SALARY
+  7  FROM EMP
+  8  WHERE EMPNO = 7839;
+  9  DBMS_OUTPUT.OUT_LINE(NAME||' ' J_TITLE ||' ' SALARY);
+ 10* END;
+SQL> /
+DBMS_OUTPUT.OUT_LINE(NAME||' ' J_TITLE ||' ' SALARY);
+                               *
+ERROR at line 9:
+ORA-06550: line 9, column 32: 
+PLS-00103: Encountered the symbol "J_TITLE" when expecting one of the 
+following: 
+) , * & = - + < / > at in is mod remainder not rem => 
+<an exponent (**)> <> or != or ~= >= <= <> and or like like2 
+like4 likec as between from using || member submultiset 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  NAME VARCHAR(20);
+  3  J_TITLE VARCHAR(20);
+  4  SALARY NUMBER(20);
+  5  BEGIN
+  6  SELECT ENAME, JOB, SAL INTO NAME, J_TITLE, SALARY
+  7  FROM EMP
+  8  WHERE EMPNO = 7839;
+  9  DBMS_OUTPUT.OUT_LINE(NAME||' ' ||J_TITLE ||' '|| SALARY);
+ 10* END;
+SQL> /
+DBMS_OUTPUT.OUT_LINE(NAME||' ' ||J_TITLE ||' '|| SALARY);
+            *
+ERROR at line 9:
+ORA-06550: line 9, column 13: 
+PLS-00302: component 'OUT_LINE' must be declared 
+ORA-06550: line 9, column 1: 
+PL/SQL: Statement ignored 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  NAME VARCHAR(20);
+  3  J_TITLE VARCHAR(20);
+  4  SALARY NUMBER(20);
+  5  BEGIN
+  6  SELECT ENAME, JOB, SAL INTO NAME, J_TITLE, SALARY
+  7  FROM EMP
+  8  WHERE EMPNO = 7839;
+  9  DBMS_OUTPUT.PUT_LINE(NAME||' ' ||J_TITLE ||' '|| SALARY);
+ 10* END;
+SQL> /
+KING PRESIDENT 5000                                                             
+
+PL/SQL procedure successfully completed.
+
+SQL> --PL SQL BLOCK TO FETCH EMPLOYEE NUMBER, NAME, AND DEPTNO FOR THE EMP WHOSE SALARY EXCEEDS 2000, JOB DESIGNATION CONTAINS 'MAN' AND WHO BELONGS TO DEPARTMENT 10
+SQL> 
+SQL> DECLARE
+  2  ENO NUMBER(10);
+  3  NAME VARCHAR(20);
+  4  DNO NUMBER(10);
+  5  BEGIN
+  6  SELECT EMPNO, ENAME, DEPTNO INTO ENO, NAME, DNO
+  7  FROM EMP
+  8  WHERE SAL > 2000 AND JOB LIKE '%MAN%' AND DEPTNO = 10;
+  9  DBMS_OUTPUT.PUT_LINE(ENO||' '||NAME||' '||DNO);
+ 10  END;
+ 11  /
+7782 CLARK 10                                                                   
+
+PL/SQL procedure successfully completed.
+
+SQL> --3 PL SQL BLOCK TO OBTAIN EMPLOYEE NO, NAME AND HIREDATE FOR EMP WITH EMPNO 7782
+SQL> DECLARE
+  2  ENO NUMBER(10)
+  3  NAME VARCHAR(20)
+  4  H_DATE DATE
+  5  
+  6  
+  7  
+  8  
+  9  
+ 10  
+ 11  
+ 12  
+ 13  
+ 14  
+ 15  
+ 16  
+ 17  
+ 18  
+ 19  BEGIN
+ 20  SELECT EMPNO, ENAME, HIREDATE INTO ENO, NAME, H_DATE
+ 21  FROM EMP
+ 22  WHERE EMPNO = 7782;
+ 23  DBMS_OUPUT.PUT_LINE(ENO||' '||NAME||' '||H_DATE);
+ 24  END;
+ 25  /
+NAME VARCHAR(20)
+*
+ERROR at line 3:
+ORA-06550: line 3, column 1: 
+PLS-00103: Encountered the symbol "NAME" when expecting one of the following: 
+:= ; not null default character 
+The symbol ";" was substituted for "NAME" to continue. 
+ORA-06550: line 4, column 1: 
+PLS-00103: Encountered the symbol "H_DATE" when expecting one of the following: 
+:= ; not null default character 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  ENO NUMBER(10);
+  3  NAME VARCHAR(20);
+  4  H_DATE DATE;
+  5  BEGIN
+  6  SELECT EMPNO, ENAME, HIREDATE INTO ENO, NAME, H_DATE
+  7  FROM EMP
+  8  WHERE EMPNO = 7782;
+  9  DBMS_OUPUT.PUT_LINE(ENO||' '||NAME||' '||H_DATE);
+ 10* END;
+ 11  /
+DBMS_OUPUT.PUT_LINE(ENO||' '||NAME||' '||H_DATE);
+*
+ERROR at line 9:
+ORA-06550: line 9, column 1: 
+PLS-00201: identifier 'DBMS_OUPUT.PUT_LINE' must be declared 
+ORA-06550: line 9, column 1: 
+PL/SQL: Statement ignored 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  ENO NUMBER(10);
+  3  NAME VARCHAR(20);
+  4  H_DATE DATE;
+  5  BEGIN
+  6  SELECT EMPNO, ENAME, HIREDATE INTO ENO, NAME, H_DATE
+  7  FROM EMP
+  8  WHERE EMPNO = 7782;
+  9  DBMS_OUTPUT.PUT_LINE(ENO||' '||NAME||' '||H_DATE);
+ 10* END;
+SQL> /
+7782 CLARK 09-JUN-81                                                            
+
+PL/SQL procedure successfully completed.
+
+SQL> --4 PL SQL BLOCK TO IDENTIFY EMP NO NAME AND COMMISSION OF EMP RECEIVING HIGHEST COMMISIION
+SQL> DECLARE
+  2  ENO NUMBER(10);
+  3  NAME VARCHAR(20);
+  4  COMM NUMBER(10);
+  5  BEGIN
+  6  SELECT EMPNO, ENAME, COMM INTO ENO, NAME, COMM
+  7  FROM EMP
+  8  WHERE COMM = (SELECT MAX(COMM)
+  9                FROM EMP);
+ 10  DBMS_OUTPUT.PUT_LINE(ENO||' '||NAME||' '||COMM);
+ 11  END;
+ 12  /
+7654 MARTIN 1400                                                                
+
+PL/SQL procedure successfully completed.
+
+SQL> --5 PL SQL BLOCK TO RETREIVE EMP NO, NAME AND JOB TITLE FOR EMP WHOSE JOB IS 'SALESMAN' WHOSE NAME ENDS WITH D
+SQL> DECLARE
+  2  ENO NUMBER(10);
+  3  NAME VARCHAR(20);
+  4  J_TITLE VARCHAR(20);
+  5  BEGIN
+  6  SELECT EMPNO, ENAME, JOB INTO ENO, NAME, J_TITLE
+  7  FROM EMP
+  8  WHERE JOB = 'SALESMAN' AND ENAME LIKE '%D';
+  9  DBMS_OUTPUT.PUT_LINE(ENO||' '||NAME||' '||J_TITLE);
+ 10  END;
+ 11  /
+7521 WARD SALESMAN                                                              
+
+PL/SQL procedure successfully completed.
+
+SQL> --6 PL SQL BLOCK TO FETCH EMP NO, NAME AND SALARY  OF EMP EARNING SECOND HIGHEST SALARY
+SQL> DECLARE
+  2  ENO NUMBER(10);
+  3  NAME VARCHAR(20);
+  4  SALARY NUMBER(10);
+  5  BEGIN
+  6  SELECT EMPNO, ENAME, SAL INTO ENO, NAME, SALARY
+  7  FROM EMP
+  8  WHERE SAL = (SELECT MAX(SAL)
+  9               FROM EMP
+ 10               WHERE SAL < (SELECT MAX(SAL)
+ 11                            FROM EMP));
+ 12  DBMS_OUTPUT.PUT_LINE(ENO||' '||NAME||' '||SALARY);
+ 13  END;
+ 14  /
+DECLARE
+*
+ERROR at line 1:
+ORA-01422: exact fetch returns more than requested number of rows 
+ORA-06512: at line 6 
+
+
+SQL> --7 PL SQL BLOCK TO RETRIEVE EMP NO, NAME AND DEPTNO FOR EMP WITH EARLIEST HIREDATE IN THE ORGANIZATION
+SQL> DECLARE
+  2  ENO NUMBER(10);
+  3  NAME VARCHAR(20);
+  4  DNO NUMBER(10);
+  5  BEGIN
+  6  SELECT EMPNO, ENAME, DEPTNO INTO ENO, NAME, DNO
+  7  FROM EMP
+  8  WHERE HIREDATE = (SELECT MIN(HIREDATE)
+  9                    FROM EMP);
+ 10  DBMS_OUTPUT.PUT_LINE()
+ 11  DBMS_OUTPUT.PUT_LINE(ENO||' '||NAME||' '||DNO);
+ 12  END;
+ 13  /
+DBMS_OUTPUT.PUT_LINE(ENO||' '||NAME||' '||DNO);
+*
+ERROR at line 11:
+ORA-06550: line 11, column 1: 
+PLS-00103: Encountered the symbol "DBMS_OUTPUT" when expecting one of the 
+following: 
+:= . ( % ; 
+The symbol ":=" was substituted for "DBMS_OUTPUT" to continue. 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  ENO NUMBER(10);
+  3  NAME VARCHAR(20);
+  4  DNO NUMBER(10);
+  5  BEGIN
+  6  SELECT EMPNO, ENAME, DEPTNO INTO ENO, NAME, DNO
+  7  FROM EMP
+  8  WHERE HIREDATE = (SELECT MIN(HIREDATE)
+  9                    FROM EMP);
+ 10  DBMS_OUTPUT.PUT_LINE(ENO||' '||NAME||' '||DNO);
+ 11* END;
+SQL> /
+7369 SMITH 20                                                                   
+
+PL/SQL procedure successfully completed.
+
+SQL> --8 PL SQL BLOCK TO OBTAIN EMP NUMBER, NAME AND SALARY OF HIGHEST PAID EMP IN DEPT 30
+SQL> DECLARE
+  2  E_NUMBER NUMBER(10);
+  3  NAME VARCHAR(20);
+  4  SALARY NUMBER(10);
+  5  BEGIN
+  6  SELECT EMPNO, ENAME, SAL INTO E_NUMBER, NAME, SALARY
+  7  FROM EMP
+  8  WHERE DEPTNO = 30 AND SAL = (SELECT MAX(SAL)
+  9                               FROM EMP
+ 10                               GROUP BY DEPTNO
+ 11                               HAVING DEPTNO = 30);
+ 12  DBMS_OUTPUT.PUT_LINE(E_NUMBER||' '||NAME||' '||SALARY);
+ 13  END;
+ 14  /
+7698 BLAKE 2850                                                                 
+
+PL/SQL procedure successfully completed.
+
+SQL> --9 PL SQL BLOCK TO FETCH EMPNO, NAME AND MANAGER ID OF EMPLOYEE WITH EMPNO 7566
+SQL> DECLARE
+  2  ENO NUMBER(10);
+  3  E_NAME VARCHAR(20);
+  4  MGR_ID NUMBER(10);
+  5  BEGIN
+  6  SELECT EMPNO, ENAME, MGR INTO ENO, E_NAME, MGR_ID
+  7  FROM EMP
+  8  WHERE EMPNO = 7566
+  9  ;
+ 10  DBMS_OUTPUT.PUT_LINE(ENO||' '||E_NAME||' '||MGR_ID);
+ 11  END;
+ 12  /
+7566 JONES 7839                                                                 
+
+PL/SQL procedure successfully completed.
+
+SQL> --PL SQL BLOCK TO RETRIEVE EMPNO, NAME AND JOB TITLE FOR EMPLOYEE DEGIGNATED AS 'MANAGER' AND HIRED IN THE MONTH OF APRIL
+SQL> DECLARE
+  2  ENO NUMBER(10)
+  3  ;
+  4  NAME VARCHAR(20);
+  5  J_TITLE VARCHAR(20);
+  6  BEGIN
+  7  SELECT EMPNO, ENAME, JOB INTO ENO, NAME, J_TITLE
+  8  FROM EMP
+  9  WHERE JOB = 'MANAGER' AND HIREDATE LIKE '%APR%';
+ 10  DBMS_OUTPUT.PUT_LINE(ENO||' '||NAME||' '||J_TITLE);
+ 11  END;
+ 12  /
+7566 JONES MANAGER                                                              
+
+PL/SQL procedure successfully completed.
+
+SQL>  --6 PL SQL BLOCK TO FETCH EMP NO, NAME AND SALARY  OF EMP EARNING SECOND HIGHEST SALARY
+SQL> DECLARE
+  2  ENO NUMBER(10);
+  3  NAME VARCHAR(20);
+  4  SALARY NUMBER(10);
+  5  BEGIN
+  6  SELECT EMPNO, ENAME, SAL INTO ENO, NAME, SAL
+  7  FROM (SELECT EMPNO, ENAME, SAL
+  8        , DENSE_RANK() OVER(ORDER BY SAL DESC) AS RANK
+  9        FROM EMP)
+ 10  WHERE RANK = 2;
+ 11  DBMS_OUTPUT.PUT_LINE(ENO||' '||NAME||' '||SALARY);
+ 12  END;
+ 13  /
+SELECT EMPNO, ENAME, SAL INTO ENO, NAME, SAL
+                                         *
+ERROR at line 6:
+ORA-06550: line 6, column 42: 
+PLS-00201: identifier 'SAL' must be declared 
+ORA-06550: line 6, column 46: 
+PL/SQL: ORA-00904: : invalid identifier 
+ORA-06550: line 6, column 1: 
+PL/SQL: SQL Statement ignored 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  ENO NUMBER(10);
+  3  NAME VARCHAR(20);
+  4  SALARY NUMBER(10);
+  5  BEGIN
+  6  SELECT EMPNO, ENAME, SAL INTO ENO, NAME, SALARY
+  7  FROM (SELECT EMPNO, ENAME, SAL
+  8        , DENSE_RANK() OVER(ORDER BY SAL DESC) AS RANK
+  9        FROM EMP)
+ 10  WHERE RANK = 2;
+ 11  DBMS_OUTPUT.PUT_LINE(ENO||' '||NAME||' '||SALARY);
+ 12* END;
+SQL> /
+DECLARE
+*
+ERROR at line 1:
+ORA-01422: exact fetch returns more than requested number of rows 
+ORA-06512: at line 6 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  ENO NUMBER(10);
+  3  NAME VARCHAR(20);
+  4  SALARY NUMBER(10);
+  5  BEGIN
+  6  SELECT EMPNO, ENAME, SAL INTO ENO, NAME, SALARY
+  7  FROM (SELECT EMPNO, ENAME, SAL
+  8        , ROW_NUMBER() OVER(ORDER BY SAL DESC) AS RANK
+  9        FROM EMP)
+ 10  WHERE RANK = 2;
+ 11  DBMS_OUTPUT.PUT_LINE(ENO||' '||NAME||' '||SALARY);
+ 12* END;
+SQL> /
+7788 SCOTT 3000                                                                 
+
+PL/SQL procedure successfully completed.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  ENO NUMBER(10);
+  3  NAME VARCHAR(20);
+  4  SALARY NUMBER(10);
+  5  BEGIN
+  6  SELECT EMPNO, ENAME, SAL INTO ENO, NAME, SALARY
+  7  FROM (SELECT EMPNO, ENAME, SAL
+  8        , DENSE_RANK() OVER(ORDER BY SAL DESC) AS RANK
+  9        FROM EMP)
+ 10  WHERE RANK = 2
+ 11  AND ROWNUM = 1;
+ 12  DBMS_OUTPUT.PUT_LINE(ENO||' '||NAME||' '||SALARY);
+ 13* END;
+SQL> /
+7788 SCOTT 3000                                                                 
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  ENO NUMBER(10);
+  3  NAME VARCHAR(20);
+  4  SALARY NUMBER(10);
+  5  BEGIN
+  6  SELECT EMPNO, ENAME, SAL INTO ENO, NAME, SALARY
+  7  FROM (SELECT EMPNO, ENAME, SAL
+  8        , ROW_NUMBER() OVER(ORDER BY SAL DESC) AS RANK
+  9        FROM EMP)
+ 10  WHERE RANK = 2;
+ 11  DBMS_OUTPUT.PUT_LINE(ENO||' '||NAME||' '||SALARY);
+ 12* END;
+SQL> /
+7788 SCOTT 3000                                                                 
+
+PL/SQL procedure successfully completed.
+
+SQL> SPOOL OFF;

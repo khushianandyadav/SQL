@@ -1,0 +1,265 @@
+SQL> --1 BASED ON THE DAY OF WEEK, PRINT "START OF THE DAY" FOR MONDAY, "WEEKEND IS COMING" FOR FRIDAY, "HOLDAY!" FOR SUNDAY "NORMAL WORKING DAY" FOR OTHERS
+SQL> 
+SQL> DECLARE
+  2  DAY = VARCHAR(20);
+  3  BEGIN
+  4  DAY = &'DAY';
+  5  IF DAY = 'MONDAY' THEN
+  6  DBMS_OUTPUT.PUT_LINE('START OF THE WEEK.');
+  7  ELSIF DAY = 'FRIDAY' THEN
+  8  DBMS_OUTPUT.PUT_LINE('WEEKEND IS COMING.');
+  9  ELSIF DAY 'SUNDAY' THEN
+ 10  DBMS_OUTPUT.PUT_LINE('HOLIDAY!');
+ 11  ELSE
+ 12  DBMS_OUTPUT.PUT_LINE('NORMAL WORKING DAY.');
+ 13  END IF;
+ 14  END;
+ 15  /
+DAY = VARCHAR(20);
+    *
+ERROR at line 2:
+ORA-06550: line 2, column 5: 
+PLS-00103: Encountered the symbol "=" when expecting one of the following: 
+constant exception <an identifier> 
+<a double-quoted delimited-identifier> table long double ref 
+char time timestamp interval date binary national character 
+nchar 
+ORA-06550: line 2, column 18: 
+PLS-00103: Encountered the symbol ";" when expecting one of the following: 
+. ( ) , * % & - + / at mod remainder rem <an exponent (**)> 
+and or || multiset 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  DAY VARCHAR(20);
+  3  BEGIN
+  4  DAY := &'DAY';
+  5  IF DAY = 'MONDAY' THEN
+  6  DBMS_OUTPUT.PUT_LINE('START OF THE WEEK.');
+  7  ELSIF DAY = 'FRIDAY' THEN
+  8  DBMS_OUTPUT.PUT_LINE('WEEKEND IS COMING.');
+  9  ELSIF DAY 'SUNDAY' THEN
+ 10  DBMS_OUTPUT.PUT_LINE('HOLIDAY!');
+ 11  ELSE
+ 12  DBMS_OUTPUT.PUT_LINE('NORMAL WORKING DAY.');
+ 13  END IF;
+ 14* END;
+SQL> /
+DAY := &'DAY';
+       *
+ERROR at line 4:
+ORA-06550: line 4, column 8: 
+PLS-00103: Encountered the symbol "&" when expecting one of the following: 
+( - + case mod new not null <an identifier> 
+<a double-quoted delimited-identifier> <a bind variable> 
+continue avg count current exists max min prior sql stddev 
+sum variance execute forall merge time timestamp interval 
+date <a string literal with character set specification> 
+<a number> <a single-quoted SQL string> pipe 
+<an alternatively-quoted string literal with character set specification> 
+<an alternatively 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  DAY VARCHAR(20);
+  3  BEGIN
+  4  DAY := '&DAY';
+  5  IF DAY = 'MONDAY' THEN
+  6  DBMS_OUTPUT.PUT_LINE('START OF THE WEEK.');
+  7  ELSIF DAY = 'FRIDAY' THEN
+  8  DBMS_OUTPUT.PUT_LINE('WEEKEND IS COMING.');
+  9  ELSIF DAY 'SUNDAY' THEN
+ 10  DBMS_OUTPUT.PUT_LINE('HOLIDAY!');
+ 11  ELSE
+ 12  DBMS_OUTPUT.PUT_LINE('NORMAL WORKING DAY.');
+ 13  END IF;
+ 14* END;
+SQL> /
+Enter value for day: MONDAY
+old   4: DAY := '&DAY';
+new   4: DAY := 'MONDAY';
+ELSIF DAY 'SUNDAY' THEN
+          *
+ERROR at line 9:
+ORA-06550: line 9, column 11: 
+PLS-00103: Encountered the symbol "SUNDAY" when expecting one of the following: 
+. ( * @ % & = - + < / > at in is mod remainder not rem then 
+<an exponent (**)> <> or != or ~= >= <= <> and or like like2 
+like4 likec between || multiset member submultiset 
+The symbol "*" was substituted for "SUNDAY" to continue. 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  DAY VARCHAR(20);
+  3  BEGIN
+  4  DAY := '&DAY';
+  5  IF DAY = 'MONDAY' THEN
+  6  DBMS_OUTPUT.PUT_LINE('START OF THE WEEK.');
+  7  ELSIF DAY = 'FRIDAY' THEN
+  8  DBMS_OUTPUT.PUT_LINE('WEEKEND IS COMING.');
+  9  ELSIF DAY = 'SUNDAY' THEN
+ 10  DBMS_OUTPUT.PUT_LINE('HOLIDAY!');
+ 11  ELSE
+ 12  DBMS_OUTPUT.PUT_LINE('NORMAL WORKING DAY.');
+ 13  END IF;
+ 14* END;
+SQL> /
+Enter value for day: MONDAY
+old   4: DAY := '&DAY';
+new   4: DAY := 'MONDAY';
+START OF THE WEEK.                                                              
+
+PL/SQL procedure successfully completed.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  DAY VARCHAR(20);
+  3  BEGIN
+  4  DAY := '&DAY';
+  5  IF DAY = 'MONDAY' THEN
+  6  DBMS_OUTPUT.PUT_LINE('START OF THE WEEK.');
+  7  ELSIF DAY = 'FRIDAY' THEN
+  8  DBMS_OUTPUT.PUT_LINE('WEEKEND IS COMING.');
+  9  ELSIF DAY = 'SUNDAY' THEN
+ 10  DBMS_OUTPUT.PUT_LINE('HOLIDAY!');
+ 11  ELSE
+ 12  DBMS_OUTPUT.PUT_LINE('NORMAL WORKING DAY.');
+ 13  END IF;
+ 14* END;
+SQL> /
+Enter value for day: FRIDAY
+old   4: DAY := '&DAY';
+new   4: DAY := 'FRIDAY';
+WEEKEND IS COMING.                                                              
+
+PL/SQL procedure successfully completed.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  DAY VARCHAR(20);
+  3  BEGIN
+  4  DAY := '&DAY';
+  5  IF DAY = 'MONDAY' THEN
+  6  DBMS_OUTPUT.PUT_LINE('START OF THE WEEK.');
+  7  ELSIF DAY = 'FRIDAY' THEN
+  8  DBMS_OUTPUT.PUT_LINE('WEEKEND IS COMING.');
+  9  ELSIF DAY = 'SUNDAY' THEN
+ 10  DBMS_OUTPUT.PUT_LINE('HOLIDAY!');
+ 11  ELSE
+ 12  DBMS_OUTPUT.PUT_LINE('NORMAL WORKING DAY.');
+ 13  END IF;
+ 14* END;
+SQL> /
+Enter value for day: SUNDAY
+old   4: DAY := '&DAY';
+new   4: DAY := 'SUNDAY';
+HOLIDAY!                                                                        
+
+PL/SQL procedure successfully completed.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  DAY VARCHAR(20);
+  3  BEGIN
+  4  DAY := '&DAY';
+  5  IF DAY = 'MONDAY' THEN
+  6  DBMS_OUTPUT.PUT_LINE('START OF THE WEEK.');
+  7  ELSIF DAY = 'FRIDAY' THEN
+  8  DBMS_OUTPUT.PUT_LINE('WEEKEND IS COMING.');
+  9  ELSIF DAY = 'SUNDAY' THEN
+ 10  DBMS_OUTPUT.PUT_LINE('HOLIDAY!');
+ 11  ELSE
+ 12  DBMS_OUTPUT.PUT_LINE('NORMAL WORKING DAY.');
+ 13  END IF;
+ 14* END;
+SQL> /
+Enter value for day: WEDNESDAY
+old   4: DAY := '&DAY';
+new   4: DAY := 'WEDNESDAY';
+NORMAL WORKING DAY.                                                             
+
+PL/SQL procedure successfully completed.
+
+SQL> -- 2 BASED ON THE HOUR OF THE DAY PRINT: "GOOD MORNING" FOR HOUR < 12, "GOOD AFTERNOON" FOR HOUR < 18 "GOOD EVENING" FOR HOUR >= 18
+SQL> DECLARE
+  2  HOUR NUMBER(10);
+  3  BEGIN
+  4   HOUR := &HOUR;
+  5   IF HOUR < 12 THEN
+  6   DBMS_OUTPUT.PUT_LINE('Good Morning');
+  7   ELSIF HOUR < 18 THEN
+  8   DBMS_OUTPUT.PUT_LINE('Good Afternoon');
+  9   ELSE
+ 10   DBMS_OUTPUT.PUT_LINE('Good Evening');
+ 11   END IF;
+ 12  END;
+ 13  /
+Enter value for hour: 7
+old   4:  HOUR := &HOUR;
+new   4:  HOUR := 7;
+Good Morning                                                                    
+
+PL/SQL procedure successfully completed.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  HOUR NUMBER(10);
+  3  BEGIN
+  4   HOUR := &HOUR;
+  5   IF HOUR < 12 THEN
+  6   DBMS_OUTPUT.PUT_LINE('Good Morning');
+  7   ELSIF HOUR < 18 THEN
+  8   DBMS_OUTPUT.PUT_LINE('Good Afternoon');
+  9   ELSE
+ 10   DBMS_OUTPUT.PUT_LINE('Good Evening');
+ 11   END IF;
+ 12* END;
+SQL> /
+Enter value for hour: 15
+old   4:  HOUR := &HOUR;
+new   4:  HOUR := 15;
+Good Afternoon                                                                  
+
+PL/SQL procedure successfully completed.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  HOUR NUMBER(10);
+  3  BEGIN
+  4   HOUR := &HOUR;
+  5   IF HOUR < 12 THEN
+  6   DBMS_OUTPUT.PUT_LINE('Good Morning');
+  7   ELSIF HOUR < 18 THEN
+  8   DBMS_OUTPUT.PUT_LINE('Good Afternoon');
+  9   ELSE
+ 10   DBMS_OUTPUT.PUT_LINE('Good Evening');
+ 11   END IF;
+ 12* END;
+SQL> /
+Enter value for hour: 20
+old   4:  HOUR := &HOUR;
+new   4:  HOUR := 20;
+Good Evening                                                                    
+
+PL/SQL procedure successfully completed.
+
+SQL> SPOOL OFF;

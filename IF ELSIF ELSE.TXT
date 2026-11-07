@@ -1,0 +1,915 @@
+SQL> SET SERVEROUTPUT ON;
+SQL> 
+SQL> --1 PL/SQL PROGRAM TO CHECK WHETHER A NUMBER IS EVEN OR ODD
+SQL> DECLARE
+  2  V_NUMBER NUMBER(10);
+  3  BEGIN
+  4   V_NUMBER := &V_NUMBER
+  5   IF MOD(V_NUMBER, 2) = 0 THEN
+  6    DBMS_OUTPUT.PUT_LINE('EVEN');
+  7   ELSE
+  8    DBMS_OUTPUT.PUT_LINE('ODD');
+  9   END IF;
+ 10  END;
+ 11  /
+Enter value for v_number: 490
+old   4:  V_NUMBER := &V_NUMBER
+new   4:  V_NUMBER := 490
+ IF MOD(V_NUMBER, 2) = 0 THEN
+ *
+ERROR at line 5:
+ORA-06550: line 5, column 2: 
+PLS-00103: Encountered the symbol "IF" when expecting one of the following: 
+* & = - + ; < / > at in is mod remainder not rem 
+<an exponent (**)> <> or != or ~= >= <= <> and or like like2 
+like4 likec between || multiset member submultiset 
+The symbol ";" was substituted for "IF" to continue. 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  V_NUMBER NUMBER(10);
+  3  BEGIN
+  4   V_NUMBER := &V_NUMBER;
+  5   IF MOD(V_NUMBER, 2) = 0 THEN
+  6    DBMS_OUTPUT.PUT_LINE('EVEN');
+  7   ELSE
+  8    DBMS_OUTPUT.PUT_LINE('ODD');
+  9   END IF;
+ 10* END;
+SQL> /
+Enter value for v_number: 230
+old   4:  V_NUMBER := &V_NUMBER;
+new   4:  V_NUMBER := 230;
+EVEN                                                                            
+
+PL/SQL procedure successfully completed.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  V_NUMBER NUMBER(10);
+  3  BEGIN
+  4   V_NUMBER := &V_NUMBER;
+  5   IF MOD(V_NUMBER, 2) = 0 THEN
+  6    DBMS_OUTPUT.PUT_LINE('EVEN');
+  7   ELSE
+  8    DBMS_OUTPUT.PUT_LINE('ODD');
+  9   END IF;
+ 10* END;
+SQL> /
+Enter value for v_number: 999
+old   4:  V_NUMBER := &V_NUMBER;
+new   4:  V_NUMBER := 999;
+ODD                                                                             
+
+PL/SQL procedure successfully completed.
+
+SQL> --2 PL SQL BLOCK TO FIND LARGEST OF THREE NUMBERS
+SQL> DECLARE
+  2  A NUMBER(10);
+  3  B NUMBER(10);
+  4  C NUMBER(10);
+  5  BEGIN
+  6  A = &A;
+  7  B := &B;
+  8  C := &C;
+  9  IF A > B AND A > C THEN
+ 10   DBMS_OUTPUT.PUT_LINE(A||' IS LARGEST.');
+ 11  ELSIF B > A AND B > C THEN
+ 12   DBMS_OUTPUT.PUT_LINE(B||' IS LARGEST.');
+ 13  ELSE
+ 14   DBMS_OUTPUT.PUT_LINE(C||' IS LARGEST.');
+ 15  END IF;
+ 16  END;
+ 17  /
+Enter value for a: 33
+old   6: A = &A;
+new   6: A = 33;
+Enter value for b: 12
+old   7: B := &B;
+new   7: B := 12;
+Enter value for c: 10
+old   8: C := &C;
+new   8: C := 10;
+A = 33;
+  *
+ERROR at line 6:
+ORA-06550: line 6, column 3: 
+PLS-00103: Encountered the symbol "=" when expecting one of the following: 
+:= . ( @ % ; 
+The symbol ":= was inserted before "=" to continue. 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  A NUMBER(10);
+  3  B NUMBER(10);
+  4  C NUMBER(10);
+  5  BEGIN
+  6  A := &A;
+  7  B := &B;
+  8  C := &C;
+  9  IF A > B AND A > C THEN
+ 10   DBMS_OUTPUT.PUT_LINE(A||' IS LARGEST.');
+ 11  ELSIF B > A AND B > C THEN
+ 12   DBMS_OUTPUT.PUT_LINE(B||' IS LARGEST.');
+ 13  ELSE
+ 14   DBMS_OUTPUT.PUT_LINE(C||' IS LARGEST.');
+ 15  END IF;
+ 16* END;
+SQL> /
+Enter value for a: 45
+old   6: A := &A;
+new   6: A := 45;
+Enter value for b: 12
+old   7: B := &B;
+new   7: B := 12;
+Enter value for c: 33
+old   8: C := &C;
+new   8: C := 33;
+45 IS LARGEST.                                                                  
+
+PL/SQL procedure successfully completed.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  A NUMBER(10);
+  3  B NUMBER(10);
+  4  C NUMBER(10);
+  5  BEGIN
+  6  A := &A;
+  7  B := &B;
+  8  C := &C;
+  9  IF A > B AND A > C THEN
+ 10   DBMS_OUTPUT.PUT_LINE(A||' IS LARGEST.');
+ 11  ELSIF B > A AND B > C THEN
+ 12   DBMS_OUTPUT.PUT_LINE(B||' IS LARGEST.');
+ 13  ELSE
+ 14   DBMS_OUTPUT.PUT_LINE(C||' IS LARGEST.');
+ 15  END IF;
+ 16* END;
+SQL> /
+Enter value for a: 33
+old   6: A := &A;
+new   6: A := 33;
+Enter value for b: 89
+old   7: B := &B;
+new   7: B := 89;
+Enter value for c: 12
+old   8: C := &C;
+new   8: C := 12;
+89 IS LARGEST.                                                                  
+
+PL/SQL procedure successfully completed.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  A NUMBER(10);
+  3  B NUMBER(10);
+  4  C NUMBER(10);
+  5  BEGIN
+  6  A := &A;
+  7  B := &B;
+  8  C := &C;
+  9  IF A > B AND A > C THEN
+ 10   DBMS_OUTPUT.PUT_LINE(A||' IS LARGEST.');
+ 11  ELSIF B > A AND B > C THEN
+ 12   DBMS_OUTPUT.PUT_LINE(B||' IS LARGEST.');
+ 13  ELSE
+ 14   DBMS_OUTPUT.PUT_LINE(C||' IS LARGEST.');
+ 15  END IF;
+ 16* END;
+SQL> /
+Enter value for a: 13
+old   6: A := &A;
+new   6: A := 13;
+Enter value for b: 19
+old   7: B := &B;
+new   7: B := 19;
+Enter value for c: 30
+old   8: C := &C;
+new   8: C := 30;
+30 IS LARGEST.                                                                  
+
+PL/SQL procedure successfully completed.
+
+SQL> --3 PROGRAM TO CHECK WHETHER A NUMBER IS POSITIVE, NEGATIVE OR ZERO
+SQL> DECLARE
+  2  A NUMBER(10);
+  3  BEGIN
+  4  A := &A;
+  5  IF A > 0 THEN
+  6   DBMS_OUTPUT.PUT_LINE('POSITIVE');
+  7  ELSIF A < 0 THEN
+  8   DBMS_OUTPUT.PUT_LINE('NEGATIVE');
+  9  ELSE
+ 10   DBMS_OUTPUT.PUT_LINE('ZERO');
+ 11  END IF;
+ 12  END;
+ 13  /
+Enter value for a: 33
+old   4: A := &A;
+new   4: A := 33;
+POSITIVE                                                                        
+
+PL/SQL procedure successfully completed.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  A NUMBER(10);
+  3  BEGIN
+  4  A := &A;
+  5  IF A > 0 THEN
+  6   DBMS_OUTPUT.PUT_LINE('POSITIVE');
+  7  ELSIF A < 0 THEN
+  8   DBMS_OUTPUT.PUT_LINE('NEGATIVE');
+  9  ELSE
+ 10   DBMS_OUTPUT.PUT_LINE('ZERO');
+ 11  END IF;
+ 12* END;
+SQL> /
+Enter value for a: -9
+old   4: A := &A;
+new   4: A := -9;
+NEGATIVE                                                                        
+
+PL/SQL procedure successfully completed.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  A NUMBER(10);
+  3  BEGIN
+  4  A := &A;
+  5  IF A > 0 THEN
+  6   DBMS_OUTPUT.PUT_LINE('POSITIVE');
+  7  ELSIF A < 0 THEN
+  8   DBMS_OUTPUT.PUT_LINE('NEGATIVE');
+  9  ELSE
+ 10   DBMS_OUTPUT.PUT_LINE('ZERO');
+ 11  END IF;
+ 12* END;
+SQL> /
+Enter value for a: 0
+old   4: A := &A;
+new   4: A := 0;
+ZERO                                                                            
+
+PL/SQL procedure successfully completed.
+
+SQL> --4 PL SQL BLOCK TO CHECK WHETHER A GIVEN YEAR IS LEAP YEAR OR NOT
+SQL> DECLARE
+  2  YEAR NUMBER(10);
+  3  BEGIN
+  4  YEAR := &YEAR;
+  5  IF MOD(YEAR, 4) = 0 AND MOD(YEAR,100) != 0 THEN
+  6   DBMS_OUTPUT.PUT_LINE('LEAP YEAR');
+  7  ELSE
+  8   DBMS_OUTPUT.PUT_LINE('NOT A LEAP YEAR');
+  9  END IF;
+ 10  END;
+ 11  /
+Enter value for year: 2024
+old   4: YEAR := &YEAR;
+new   4: YEAR := 2024;
+LEAP YEAR                                                                       
+
+PL/SQL procedure successfully completed.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  YEAR NUMBER(10);
+  3  BEGIN
+  4  YEAR := &YEAR;
+  5  IF MOD(YEAR, 4) = 0 AND MOD(YEAR,100) != 0 THEN
+  6   DBMS_OUTPUT.PUT_LINE('LEAP YEAR');
+  7  ELSE
+  8   DBMS_OUTPUT.PUT_LINE('NOT A LEAP YEAR');
+  9  END IF;
+ 10* END;
+SQL> /
+Enter value for year: 2000
+old   4: YEAR := &YEAR;
+new   4: YEAR := 2000;
+NOT A LEAP YEAR                                                                 
+
+PL/SQL procedure successfully completed.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  YEAR NUMBER(10);
+  3  BEGIN
+  4  YEAR := &YEAR;
+  5  IF YEAR NOT LIKE '%00' AND MOD(YEAR, 4) = 0 THEN
+  6   DBMS_OUTPUT.PUT_LINE('LEAP YEAR');
+  7  ELSIF YEAR LIKE '%00' AND MOD(YEAR, 400) = 0 THEN
+  8   DBMS_OUTPUT.PUT_LINE('LEAP YEAR');
+  9  ELSE
+ 10   DBMS_OUTPUT.PUT_LINE('NOT A LEAP YEAR');
+ 11  END IF;
+ 12* END;
+SQL> /
+Enter value for year: 2000
+old   4: YEAR := &YEAR;
+new   4: YEAR := 2000;
+LEAP YEAR                                                                       
+
+PL/SQL procedure successfully completed.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  YEAR NUMBER(10);
+  3  BEGIN
+  4  YEAR := &YEAR;
+  5  IF YEAR NOT LIKE '%00' AND MOD(YEAR, 4) = 0 THEN
+  6   DBMS_OUTPUT.PUT_LINE('LEAP YEAR');
+  7  ELSIF YEAR LIKE '%00' AND MOD(YEAR, 400) = 0 THEN
+  8   DBMS_OUTPUT.PUT_LINE('LEAP YEAR');
+  9  ELSE
+ 10   DBMS_OUTPUT.PUT_LINE('NOT A LEAP YEAR');
+ 11  END IF;
+ 12* END;
+SQL> 2004
+SP2-0226: Invalid line number 
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  YEAR NUMBER(10);
+  3  BEGIN
+  4  YEAR := &YEAR;
+  5  IF YEAR NOT LIKE '%00' AND MOD(YEAR, 4) = 0 THEN
+  6   DBMS_OUTPUT.PUT_LINE('LEAP YEAR');
+  7  ELSIF YEAR LIKE '%00' AND MOD(YEAR, 400) = 0 THEN
+  8   DBMS_OUTPUT.PUT_LINE('LEAP YEAR');
+  9  ELSE
+ 10   DBMS_OUTPUT.PUT_LINE('NOT A LEAP YEAR');
+ 11  END IF;
+ 12* END;
+SQL> /
+Enter value for year: 2024
+old   4: YEAR := &YEAR;
+new   4: YEAR := 2024;
+LEAP YEAR                                                                       
+
+PL/SQL procedure successfully completed.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  YEAR NUMBER(10);
+  3  BEGIN
+  4  YEAR := &YEAR;
+  5  IF YEAR NOT LIKE '%00' AND MOD(YEAR, 4) = 0 THEN
+  6   DBMS_OUTPUT.PUT_LINE('LEAP YEAR');
+  7  ELSIF YEAR LIKE '%00' AND MOD(YEAR, 400) = 0 THEN
+  8   DBMS_OUTPUT.PUT_LINE('LEAP YEAR');
+  9  ELSE
+ 10   DBMS_OUTPUT.PUT_LINE('NOT A LEAP YEAR');
+ 11  END IF;
+ 12* END;
+SQL> /
+Enter value for year: 2022
+old   4: YEAR := &YEAR;
+new   4: YEAR := 2022;
+NOT A LEAP YEAR                                                                 
+
+PL/SQL procedure successfully completed.
+
+SQL> --5 PL SQL PROGRAM TO CHECK WHETHER A NUMBER IS DIVISIBLE BY BOTH 5 AND 11
+SQL> DECLARE
+  2  A NUMBER(10);
+  3  BEGIN
+  4  A := &A;
+  5  IF MOD(A, 5)=0 AND MOD(A,11)=0 THEN
+  6   DBMS_OUTPUT.PUT_LINE('DIVISIBLE BY BOTH 5 AND 11')
+  7  ELSE
+  8   DBMS_OUTPUT.PUT_LINE('NOT DIVISIBLE BY BOTH 5 AND 11');
+  9  END IF;
+ 10  END;
+ 11  /
+Enter value for a: 55
+old   4: A := &A;
+new   4: A := 55;
+ELSE
+*
+ERROR at line 7:
+ORA-06550: line 7, column 1: 
+PLS-00103: Encountered the symbol "ELSE" when expecting one of the following: 
+:= . ( % ; 
+The symbol ";" was substituted for "ELSE" to continue. 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  A NUMBER(10);
+  3  BEGIN
+  4  A := &A;
+  5  IF MOD(A, 5)=0 AND MOD(A,11)=0 THEN
+  6   DBMS_OUTPUT.PUT_LINE('DIVISIBLE BY BOTH 5 AND 11');
+  7  ELSE
+  8   DBMS_OUTPUT.PUT_LINE('NOT DIVISIBLE BY BOTH 5 AND 11');
+  9  END IF;
+ 10* END;
+SQL> /
+Enter value for a: 55
+old   4: A := &A;
+new   4: A := 55;
+DIVISIBLE BY BOTH 5 AND 11                                                      
+
+PL/SQL procedure successfully completed.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  A NUMBER(10);
+  3  BEGIN
+  4  A := &A;
+  5  IF MOD(A, 5)=0 AND MOD(A,11)=0 THEN
+  6   DBMS_OUTPUT.PUT_LINE('DIVISIBLE BY BOTH 5 AND 11');
+  7  ELSE
+  8   DBMS_OUTPUT.PUT_LINE('NOT DIVISIBLE BY BOTH 5 AND 11');
+  9  END IF;
+ 10* END;
+SQL> 111
+SP2-0226: Invalid line number 
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  A NUMBER(10);
+  3  BEGIN
+  4  A := &A;
+  5  IF MOD(A, 5)=0 AND MOD(A,11)=0 THEN
+  6   DBMS_OUTPUT.PUT_LINE('DIVISIBLE BY BOTH 5 AND 11');
+  7  ELSE
+  8   DBMS_OUTPUT.PUT_LINE('NOT DIVISIBLE BY BOTH 5 AND 11');
+  9  END IF;
+ 10* END;
+SQL> /
+Enter value for a: 110
+old   4: A := &A;
+new   4: A := 110;
+DIVISIBLE BY BOTH 5 AND 11                                                      
+
+PL/SQL procedure successfully completed.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  A NUMBER(10);
+  3  BEGIN
+  4  A := &A;
+  5  IF MOD(A, 5)=0 AND MOD(A,11)=0 THEN
+  6   DBMS_OUTPUT.PUT_LINE('DIVISIBLE BY BOTH 5 AND 11');
+  7  ELSE
+  8   DBMS_OUTPUT.PUT_LINE('NOT DIVISIBLE BY BOTH 5 AND 11');
+  9  END IF;
+ 10* END;
+SQL> 111
+SP2-0226: Invalid line number 
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  A NUMBER(10);
+  3  BEGIN
+  4  A := &A;
+  5  IF MOD(A, 5)=0 AND MOD(A,11)=0 THEN
+  6   DBMS_OUTPUT.PUT_LINE('DIVISIBLE BY BOTH 5 AND 11');
+  7  ELSE
+  8   DBMS_OUTPUT.PUT_LINE('NOT DIVISIBLE BY BOTH 5 AND 11');
+  9  END IF;
+ 10* END;
+SQL> /
+Enter value for a: 111
+old   4: A := &A;
+new   4: A := 111;
+NOT DIVISIBLE BY BOTH 5 AND 11                                                  
+
+PL/SQL procedure successfully completed.
+
+SQL> --6 PL SQL BLOCK THAT PRINTS WEEKDAY NAME BASED ON NUMBER 1-7, IF NUMBER IS NOT VALID PRINT "Invalid Day"
+SQL> DECLARE
+  2  DAY NUMBER(10);
+  3  BEGIN
+  4  DAY := &DAY;
+  5  IF DAY = 1 THEN
+  6   DBMS_OUTPUT.PUT_LINE('MONDAY');
+  7  ELSIF DAY = 2 THEN
+  8   DBMS_OUTPUT.PUT_LINE('TUESDAY');
+  9  ELSIF DAY = 3 THEN
+ 10   DBMS_OUTPUT.PUT_LINE('WEDNESDAY');
+ 11  ELSIF DAY = 4 THEN
+ 12   DBMS_OUTPUT.PUT_LINE('THURSDAY');
+ 13  ELSIF DAY = 5 THEN
+ 14   DBMS_OUTPUT.PUT_LINE('FRIDAY');
+ 15  ELSIF DAY = 6 THEN
+ 16   DBMS_OUTPUT.PUT_LINE('SATURDAY');
+ 17  ELSIF DAY = 7 THEN
+ 18   DBMS_OUTPUT.PUT_LINE('SUNDAY');
+ 19  ELSE
+ 20   DBMS_OUTPUT.PUT_LINE('Invalid Day.');
+ 21  END IF;
+ 22  END;
+ 23  /
+Enter value for day: 4
+old   4: DAY := &DAY;
+new   4: DAY := 4;
+THURSDAY                                                                        
+
+PL/SQL procedure successfully completed.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  DAY NUMBER(10);
+  3  BEGIN
+  4  DAY := &DAY;
+  5  IF DAY = 1 THEN
+  6   DBMS_OUTPUT.PUT_LINE('MONDAY');
+  7  ELSIF DAY = 2 THEN
+  8   DBMS_OUTPUT.PUT_LINE('TUESDAY');
+  9  ELSIF DAY = 3 THEN
+ 10   DBMS_OUTPUT.PUT_LINE('WEDNESDAY');
+ 11  ELSIF DAY = 4 THEN
+ 12   DBMS_OUTPUT.PUT_LINE('THURSDAY');
+ 13  ELSIF DAY = 5 THEN
+ 14   DBMS_OUTPUT.PUT_LINE('FRIDAY');
+ 15  ELSIF DAY = 6 THEN
+ 16   DBMS_OUTPUT.PUT_LINE('SATURDAY');
+ 17  ELSIF DAY = 7 THEN
+ 18   DBMS_OUTPUT.PUT_LINE('SUNDAY');
+ 19  ELSE
+ 20   DBMS_OUTPUT.PUT_LINE('Invalid Day.');
+ 21  END IF;
+ 22* END;
+SQL> /
+Enter value for day: 13
+old   4: DAY := &DAY;
+new   4: DAY := 13;
+Invalid Day.                                                                    
+
+PL/SQL procedure successfully completed.
+
+SQL> --7 PL SQL PROGRAM TO CHECK WHETHER A GIVEN CHARACTER IS A VOWEL OR A CONSONANT
+SQL> DECLARE
+  2  V_CHAR CHAR(20);
+  3  BEGIN
+  4  V_CHAR := &V_CHAR;
+  5  IF V_CHAR IN ('a', 'A', 'e', 'E', 'i', 'I', 'o', 'O', 'u', 'U') THEN
+  6   DBMS_OUTPUT.PUT_LINE('VOWEL');
+  7  ELSE
+  8   DBMS_OUTPUT.PUT_LINE('CONSONANT');
+  9  END IF;
+ 10  END;
+ 11  /
+Enter value for v_char: E
+old   4: V_CHAR := &V_CHAR;
+new   4: V_CHAR := E;
+V_CHAR := E;
+          *
+ERROR at line 4:
+ORA-06550: line 4, column 11: 
+PLS-00201: identifier 'E' must be declared 
+ORA-06550: line 4, column 1: 
+PL/SQL: Statement ignored 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  V_CHAR CHAR(20);
+  3  BEGIN
+  4  V_CHAR := E;
+  5  IF V_CHAR IN ('a', 'A', 'e', 'E', 'i', 'I', 'o', 'O', 'u', 'U') THEN
+  6   DBMS_OUTPUT.PUT_LINE('VOWEL');
+  7  ELSE
+  8   DBMS_OUTPUT.PUT_LINE('CONSONANT');
+  9  END IF;
+ 10* END;
+SQL> /
+V_CHAR := E;
+          *
+ERROR at line 4:
+ORA-06550: line 4, column 11: 
+PLS-00201: identifier 'E' must be declared 
+ORA-06550: line 4, column 1: 
+PL/SQL: Statement ignored 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  V_CHAR CHAR(20);
+  3  BEGIN
+  4  V_CHAR := &V_CHAR;
+  5  IF V_CHAR IN ('a', 'A', 'e', 'E', 'i', 'I', 'o', 'O', 'u', 'U') THEN
+  6   DBMS_OUTPUT.PUT_LINE('VOWEL');
+  7  ELSE
+  8   DBMS_OUTPUT.PUT_LINE('CONSONANT');
+  9  END IF;
+ 10* END;
+SQL> /
+Enter value for v_char: 'E'
+old   4: V_CHAR := &V_CHAR;
+new   4: V_CHAR := 'E';
+VOWEL                                                                           
+
+PL/SQL procedure successfully completed.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  V_CHAR CHAR(20);
+  3  BEGIN
+  4  V_CHAR := '&V_CHAR';
+  5  IF V_CHAR IN ('a', 'A', 'e', 'E', 'i', 'I', 'o', 'O', 'u', 'U') THEN
+  6   DBMS_OUTPUT.PUT_LINE('VOWEL');
+  7  ELSE
+  8   DBMS_OUTPUT.PUT_LINE('CONSONANT');
+  9  END IF;
+ 10* END;
+SQL> /
+Enter value for v_char: P
+old   4: V_CHAR := '&V_CHAR';
+new   4: V_CHAR := 'P';
+CONSONANT                                                                       
+
+PL/SQL procedure successfully completed.
+
+SQL> --8 PL SQL BLOCK TO PRINT GRADE BASED ON MARKS A -> 90 AND ABOVE, B -> 75 TO 89, C -> 60 TO 74, D -> 35 TO 59, F -> 35
+SQL> DECLARE
+  2  MARKS NUMBER(10);
+  3  BEGIN
+  4  MARKS := &MARKS;
+  5  IF MARKS >= 90 THEN
+  6   DBMS_OUTPUT.PUT_LINE('GRADE A');
+  7  ELSIF MARKS >= 75 AND MARKS < 90 THEN
+  8   DBMS_OUTPUT.PUT_LINE('GRADE B');
+  9  ELSIF MARKS >= 60 AND MARKS < 75 THEN
+ 10   DBMS_OUTPUT.PUT_LINE('GRADE C');
+ 11  ELSIF MARKS >= 35 AND MARKS < 60 THEN
+ 12   DBMS_OUTPUT.PUT_LINE('GRADE D');
+ 13  ELSE
+ 14   DBMS_OUTPUT.PUT_LINE('GRADE F');
+ 15  END IF;
+ 16  END;
+ 17  /
+Enter value for marks: 45
+old   4: MARKS := &MARKS;
+new   4: MARKS := 45;
+GRADE D                                                                         
+
+PL/SQL procedure successfully completed.
+
+SQL> --9 check WHETHER A NUMBER IS A MULTIPLE OF 3 OR 7 OR BOTH
+SQL> DECLARE
+  2  NUM NUMBER(10);
+  3  BEGIN
+  4  NUM := &NUM;
+  5  IF MOD(NUM,3) = 0 AND MOD(NUM, 7) = 0 THEN
+  6   DBMS_OUTPUT.PUT_LINE('MULTIPLE OF BOTH 3 AND 7');
+  7  ELSIF MOD(NUM,3) = 0 THEN
+  8   DBMS_OUTPUT.PUT_LINE('MULTIPLE OF 3');
+  9  ELSIF MOD(NUM,7) = 0 THEN
+ 10   DBMS_OUTPUT.PUT_LINE('MULTIPLE OF 7');
+ 11  ELSE
+ 12   DBMS_OUTPUT.PUT_LINE('NOT A MULTIPLE OF 3 OR 7');
+ 13  END IF;
+ 14  END;
+ 15  /
+Enter value for num: 63
+old   4: NUM := &NUM;
+new   4: NUM := 63;
+MULTIPLE OF BOTH 3 AND 7                                                        
+
+PL/SQL procedure successfully completed.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  NUM NUMBER(10);
+  3  BEGIN
+  4  NUM := &NUM;
+  5  IF MOD(NUM,3) = 0 AND MOD(NUM, 7) = 0 THEN
+  6   DBMS_OUTPUT.PUT_LINE('MULTIPLE OF BOTH 3 AND 7');
+  7  ELSIF MOD(NUM,3) = 0 THEN
+  8   DBMS_OUTPUT.PUT_LINE('MULTIPLE OF 3');
+  9  ELSIF MOD(NUM,7) = 0 THEN
+ 10   DBMS_OUTPUT.PUT_LINE('MULTIPLE OF 7');
+ 11  ELSE
+ 12   DBMS_OUTPUT.PUT_LINE('NOT A MULTIPLE OF 3 OR 7');
+ 13  END IF;
+ 14* END;
+SQL> /
+Enter value for num: 99
+old   4: NUM := &NUM;
+new   4: NUM := 99;
+MULTIPLE OF 3                                                                   
+
+PL/SQL procedure successfully completed.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  NUM NUMBER(10);
+  3  BEGIN
+  4  NUM := &NUM;
+  5  IF MOD(NUM,3) = 0 AND MOD(NUM, 7) = 0 THEN
+  6   DBMS_OUTPUT.PUT_LINE('MULTIPLE OF BOTH 3 AND 7');
+  7  ELSIF MOD(NUM,3) = 0 THEN
+  8   DBMS_OUTPUT.PUT_LINE('MULTIPLE OF 3');
+  9  ELSIF MOD(NUM,7) = 0 THEN
+ 10   DBMS_OUTPUT.PUT_LINE('MULTIPLE OF 7');
+ 11  ELSE
+ 12   DBMS_OUTPUT.PUT_LINE('NOT A MULTIPLE OF 3 OR 7');
+ 13  END IF;
+ 14* END;
+SQL> /
+Enter value for num: 77
+old   4: NUM := &NUM;
+new   4: NUM := 77;
+MULTIPLE OF 7                                                                   
+
+PL/SQL procedure successfully completed.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  NUM NUMBER(10);
+  3  BEGIN
+  4  NUM := &NUM;
+  5  IF MOD(NUM,3) = 0 AND MOD(NUM, 7) = 0 THEN
+  6   DBMS_OUTPUT.PUT_LINE('MULTIPLE OF BOTH 3 AND 7');
+  7  ELSIF MOD(NUM,3) = 0 THEN
+  8   DBMS_OUTPUT.PUT_LINE('MULTIPLE OF 3');
+  9  ELSIF MOD(NUM,7) = 0 THEN
+ 10   DBMS_OUTPUT.PUT_LINE('MULTIPLE OF 7');
+ 11  ELSE
+ 12   DBMS_OUTPUT.PUT_LINE('NOT A MULTIPLE OF 3 OR 7');
+ 13  END IF;
+ 14* END;
+SQL> 88
+SP2-0226: Invalid line number 
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  NUM NUMBER(10);
+  3  BEGIN
+  4  NUM := &NUM;
+  5  IF MOD(NUM,3) = 0 AND MOD(NUM, 7) = 0 THEN
+  6   DBMS_OUTPUT.PUT_LINE('MULTIPLE OF BOTH 3 AND 7');
+  7  ELSIF MOD(NUM,3) = 0 THEN
+  8   DBMS_OUTPUT.PUT_LINE('MULTIPLE OF 3');
+  9  ELSIF MOD(NUM,7) = 0 THEN
+ 10   DBMS_OUTPUT.PUT_LINE('MULTIPLE OF 7');
+ 11  ELSE
+ 12   DBMS_OUTPUT.PUT_LINE('NOT A MULTIPLE OF 3 OR 7');
+ 13  END IF;
+ 14* END;
+SQL> /
+Enter value for num: 78
+old   4: NUM := &NUM;
+new   4: NUM := 78;
+MULTIPLE OF 3                                                                   
+
+PL/SQL procedure successfully completed.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  NUM NUMBER(10);
+  3  BEGIN
+  4  NUM := &NUM;
+  5  IF MOD(NUM,3) = 0 AND MOD(NUM, 7) = 0 THEN
+  6   DBMS_OUTPUT.PUT_LINE('MULTIPLE OF BOTH 3 AND 7');
+  7  ELSIF MOD(NUM,3) = 0 THEN
+  8   DBMS_OUTPUT.PUT_LINE('MULTIPLE OF 3');
+  9  ELSIF MOD(NUM,7) = 0 THEN
+ 10   DBMS_OUTPUT.PUT_LINE('MULTIPLE OF 7');
+ 11  ELSE
+ 12   DBMS_OUTPUT.PUT_LINE('NOT A MULTIPLE OF 3 OR 7');
+ 13  END IF;
+ 14* END;
+SQL> /
+Enter value for num: 88
+old   4: NUM := &NUM;
+new   4: NUM := 88;
+NOT A MULTIPLE OF 3 OR 7                                                        
+
+PL/SQL procedure successfully completed.
+
+SQL> --WRITE A PL SQL PROGRAM TO CHECK IF THREE GIVEN ANGLES CAN FORM A VALID TRIANGLE OR NOT. A TRIANGLE IS VALID IF SUM OF ALL THREE ANGLES IS EXACLY 180
+SQL> DECLARE
+  2  A1 NUMBER(10);
+  3  A2 NUMBER(10);
+  4  A3 NUMBER(10);
+  5  BEGIN
+  6  A1 := &A1;
+  7  A2 := &A2;
+  8  A3 := &A3;
+  9  IF A1 + A2 + A3 = 180 THEN
+ 10   DBMS_OUTPUT.PUT_LINE('ANGLES FORM A VALID TRIANGLE');
+ 11  ELSE
+ 12   DBMS_OUTPUT.PUT_LINE('ANGLES DO NOT FORM A VALID TRIANGLE');
+ 13  END IF;
+ 14  END;
+ 15  /
+Enter value for a1: 30
+old   6: A1 := &A1;
+new   6: A1 := 30;
+Enter value for a2: 60
+old   7: A2 := &A2;
+new   7: A2 := 60;
+Enter value for a3: 90
+old   8: A3 := &A3;
+new   8: A3 := 90;
+ANGLES FORM A VALID TRIANGLE                                                    
+
+PL/SQL procedure successfully completed.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  A1 NUMBER(10);
+  3  A2 NUMBER(10);
+  4  A3 NUMBER(10);
+  5  BEGIN
+  6  A1 := &A1;
+  7  A2 := &A2;
+  8  A3 := &A3;
+  9  IF A1 + A2 + A3 = 180 THEN
+ 10   DBMS_OUTPUT.PUT_LINE('ANGLES FORM A VALID TRIANGLE');
+ 11  ELSE
+ 12   DBMS_OUTPUT.PUT_LINE('ANGLES DO NOT FORM A VALID TRIANGLE');
+ 13  END IF;
+ 14* END;
+SQL> 88
+SP2-0226: Invalid line number 
+SQL> ED
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  A1 NUMBER(10);
+  3  A2 NUMBER(10);
+  4  A3 NUMBER(10);
+  5  BEGIN
+  6  A1 := &A1;
+  7  A2 := &A2;
+  8  A3 := &A3;
+  9  IF A1 + A2 + A3 = 180 THEN
+ 10   DBMS_OUTPUT.PUT_LINE('ANGLES FORM A VALID TRIANGLE');
+ 11  ELSE
+ 12   DBMS_OUTPUT.PUT_LINE('ANGLES DO NOT FORM A VALID TRIANGLE');
+ 13  END IF;
+ 14* END;
+SQL> /
+Enter value for a1: 88
+old   6: A1 := &A1;
+new   6: A1 := 88;
+Enter value for a2: 22
+old   7: A2 := &A2;
+new   7: A2 := 22;
+Enter value for a3: 99
+old   8: A3 := &A3;
+new   8: A3 := 99;
+ANGLES DO NOT FORM A VALID TRIANGLE                                             
+
+PL/SQL procedure successfully completed.
+
+SQL> spool off;

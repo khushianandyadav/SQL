@@ -1,0 +1,314 @@
+SQL> SET SERVEROUTPUT ON;
+SQL> CREATE OR REPLACE FUNCTION B1
+  2  RETURN VARCHAR
+  3  IS
+  4  BEGIN
+  5  RETURN 'WELCOME TO PLSQL CLASS';
+  6  END B1;
+  7  /
+
+Function created.
+
+SQL> SELECT B1()
+  2  FROM DUAL;
+
+B1()                                                                            
+--------------------------------------------------------------------------------
+WELCOME TO PLSQL CLASS                                                          
+
+SQL> --EXECUTE A FUNCTION USING ANONYMOUS BLOCK
+SQL> DECLARE
+  2   B VARCHAR2(200);
+  3  BEGIN
+  4   B := B1();
+  5   DBMS_OUTPUT.PUT_LINE(B);
+  6  END;
+  7  /
+WELCOME TO PLSQL CLASS                                                          
+
+PL/SQL procedure successfully completed.
+
+SQL> --WRITE A FUNCTION IN PL/SQL THAT ACCEPTS A NAME AS INPUT AND RETURNS A GREETING MESSAGE IN THE FORMAT "WELCOME TO QSPIDERS: <NAME>"
+SQL> 
+SQL> CREATE OR REPLACE FUNCTION GREETING(NAME VARCHAR)
+  2  RETURN VARCHAR
+  3  IS
+  4  BEGIN
+  5  RETURN 'WELCOME TO QSPIDERS: '||NAME;
+  6  END GREETING;
+  7  /
+
+Function created.
+
+SQL> SELECT GREETING('KHUSHI')
+  2  FROM DUAL;
+
+GREETING('KHUSHI')                                                              
+--------------------------------------------------------------------------------
+WELCOME TO QSPIDERS: KHUSHI                                                     
+
+SQL> SSELECT GREETING(ENAME)
+SP2-0734: unknown command beginning "SSELECT GR..." - rest of line ignored.
+SQL> SELECT GREETING(ENAME)
+  2  FROM EMP;
+
+GREETING(ENAME)                                                                 
+--------------------------------------------------------------------------------
+WELCOME TO QSPIDERS: SMITH                                                      
+WELCOME TO QSPIDERS: ALLEN                                                      
+WELCOME TO QSPIDERS: WARD                                                       
+WELCOME TO QSPIDERS: JONES                                                      
+WELCOME TO QSPIDERS: MARTIN                                                     
+WELCOME TO QSPIDERS: BLAKE                                                      
+WELCOME TO QSPIDERS: CLARK                                                      
+WELCOME TO QSPIDERS: SCOTT                                                      
+WELCOME TO QSPIDERS: KING                                                       
+WELCOME TO QSPIDERS: TURNER                                                     
+WELCOME TO QSPIDERS: ADAMS                                                      
+
+GREETING(ENAME)                                                                 
+--------------------------------------------------------------------------------
+WELCOME TO QSPIDERS: JAMES                                                      
+WELCOME TO QSPIDERS: FORD                                                       
+WELCOME TO QSPIDERS: MILLER                                                     
+
+14 rows selected.
+
+SQL> --WRITE A         PL SQL FUNCTION GET_SALARY THAT: ACCEPTS AN EMPLOYEE NUMBER AS INPUT AND RETURNS THE SALARY OF THAT EMPLOYEE FROM THE TABLE
+SQL> CREATE OR REPLACE FUNCTION GET_SALARY(EMPNUMBER NUMBER)
+  2  RETURN NUMBER
+  3  IS
+  4  BEGIN
+  5  RETURN SALARY;
+  6  END GET_SALARY;
+  7  /
+
+Warning: Function created with compilation errors.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE FUNCTION GET_SALARY(EMPNUMBER NUMBER)
+  2  RETURN SALARY NUMBER
+  3  IS
+  4  BEGIN
+  5  RETURN SALARY;
+  6* END GET_SALARY;
+SQL> /
+
+Warning: Function created with compilation errors.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE FUNCTION GET_SALARY(EMPNUMBER NUMBER)
+  2  RETURN NUMBER
+  3  IS
+  4  BEGIN
+  5  SELECT SAL
+  6  FROM EMP
+  7  INTO SALARY
+  8  FROM EMP
+  9  WHERE EMPNO = EMPNUMBER;
+ 10  RETURN SALARY;
+ 11* END GET_SALARY;
+SQL> /
+
+Warning: Function created with compilation errors.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE FUNCTION GET_SALARY(EMPNUMBER NUMBER)
+  2  RETURN NUMBER
+  3  IS
+  4  BEGIN
+  5  SELECT SAL
+  6  INTO SALARY
+  7  FROM EMP
+  8  FROM EMP
+  9  WHERE EMPNO = EMPNUMBER;
+ 10  RETURN SALARY;
+ 11* END GET_SALARY;
+SQL> /
+
+Warning: Function created with compilation errors.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE FUNCTION GET_SALARY(EMPNUMBER NUMBER)
+  2  RETURN NUMBER
+  3  IS
+  4  SALARY NUMBER
+  5  BEGIN
+  6  SELECT SAL
+  7  INTO SALARY
+  8  FROM EMP
+  9  FROM EMP
+ 10  WHERE EMPNO = EMPNUMBER;
+ 11  RETURN SALARY;
+ 12* END GET_SALARY;
+SQL> /
+
+Warning: Function created with compilation errors.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE FUNCTION GET_SALARY(EMPNUMBER NUMBER)
+  2  RETURN NUMBER
+  3  IS
+  4  SALARY NUMBER;
+  5  BEGIN
+  6  SELECT SAL
+  7  INTO SALARY
+  8  FROM EMP
+  9  WHERE EMPNO = EMPNUMBER;
+ 10  RETURN SALARY;
+ 11* END GET_SALARY;
+SQL> /
+
+Function created.
+
+SQL> SELECT GET_SALARY(7829)
+  2  FROM EMP;
+
+GET_SALARY(7829)                                                                
+----------------                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+
+GET_SALARY(7829)                                                                
+----------------                                                                
+                                                                                
+                                                                                
+                                                                                
+
+14 rows selected.
+
+SQL> SELECT EMPNP
+  2  
+SQL> 
+SQL> SELECT EMPNO
+  2  FROM EMP;
+
+     EMPNO                                                                      
+----------                                                                      
+      7369                                                                      
+      7499                                                                      
+      7521                                                                      
+      7566                                                                      
+      7654                                                                      
+      7698                                                                      
+      7782                                                                      
+      7788                                                                      
+      7839                                                                      
+      7844                                                                      
+      7876                                                                      
+
+     EMPNO                                                                      
+----------                                                                      
+      7900                                                                      
+      7902                                                                      
+      7934                                                                      
+
+14 rows selected.
+
+SQL> SELECT GET_SALARY(7900)
+  2  FROM EMP;
+
+GET_SALARY(7900)                                                                
+----------------                                                                
+             950                                                                
+             950                                                                
+             950                                                                
+             950                                                                
+             950                                                                
+             950                                                                
+             950                                                                
+             950                                                                
+             950                                                                
+             950                                                                
+             950                                                                
+
+GET_SALARY(7900)                                                                
+----------------                                                                
+             950                                                                
+             950                                                                
+             950                                                                
+
+14 rows selected.
+
+SQL> CREATE OR REPLACE FUNCTION GET_SALARY(EMPID NUMBER)
+  2  RETURN NUMBER
+  3  IS
+  4  V_SAL NUMBER(5);
+  5  BEGIN
+  6  SELECT SAL INTO V_SAL
+  7  FROM EMP
+  8  WHERE EMPNO = EMPID;
+  9  RETURN V_SAL;
+ 10  END GET_SALARY;
+ 11  /
+
+Function created.
+
+SQL> SELECT GET_SALARY(7369);
+SELECT GET_SALARY(7369)
+                      *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT GET_SALARY(7369)
+  2* FROM EMP;
+SQL> /
+FROM EMP;
+        *
+ERROR at line 2:
+ORA-00911: invalid character 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT GET_SALARY(7369)
+  2* FROM EMP
+SQL> /
+
+GET_SALARY(7369)                                                                
+----------------                                                                
+             800                                                                
+             800                                                                
+             800                                                                
+             800                                                                
+             800                                                                
+             800                                                                
+             800                                                                
+             800                                                                
+             800                                                                
+             800                                                                
+             800                                                                
+
+GET_SALARY(7369)                                                                
+----------------                                                                
+             800                                                                
+             800                                                                
+             800                                                                
+
+14 rows selected.
+
+SQL> spool off;
